@@ -1,15 +1,28 @@
+# Fichiers et dossiers générés par Android Studio / IntelliJ
+.idea/
 *.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
+
+# Fichiers de build
+.gradle/
+build/
+*/build/
+
+# Fichiers système
 .DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
+Thumbs.db
+
+# Fichiers locaux sensibles
 local.properties
+
+# Cache Gradle
+.gradle/
+
+# Logs
+*.log
+
+# Fichiers temporaires
+*.tmp
+
+# Fichiers APK ou AAB générés
+*.apk
+*.aab
