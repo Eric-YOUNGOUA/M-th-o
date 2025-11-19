@@ -8,21 +8,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.text.DecimalFormat;
 import java.util.Locale;
 
@@ -107,7 +103,8 @@ public class MainActivity extends AppCompatActivity {
             JSONObject coord = jsonResponse.getJSONObject("coord");
             double lat = coord.getDouble("lat");
             double lon = coord.getDouble("lon");
-            coordinatesTextView.setText(String.format(Locale.FRANCE, "Lat: %.2f, Lon: %.2f", lat, lon));
+            // Ajout du libellé "Coordonnées: " directement dans la chaîne
+            coordinatesTextView.setText(String.format(Locale.FRANCE, "Coordonnées: Lat: %.2f, Lon: %.2f", lat, lon));
 
             // 2. Météo (description)
             JSONArray weatherArray = jsonResponse.getJSONArray("weather");
@@ -129,8 +126,9 @@ public class MainActivity extends AppCompatActivity {
 
             temperatureTextView.setText(String.format(Locale.FRANCE, "%s°C", df.format(temp)));
             tempMinMaxTextView.setText(String.format(Locale.FRANCE, "Max: %s°C  Min: %s°C", df.format(tempMax), df.format(tempMin)));
-            pressureTextView.setText(String.format(Locale.FRANCE, "%d hPa", pressure));
-            humidityTextView.setText(String.format(Locale.FRANCE, "%d%%", humidity));
+            // Ajout des libellés pour la pression et l'humidité
+            pressureTextView.setText(String.format(Locale.FRANCE, "Pression: %d hPa", pressure));
+            humidityTextView.setText(String.format(Locale.FRANCE, "Humidité: %d%%", humidity));
 
             // 4. Vent (vitesse, direction)
             JSONObject wind = jsonResponse.getJSONObject("wind");
@@ -138,8 +136,9 @@ public class MainActivity extends AppCompatActivity {
             int windDeg = wind.getInt("deg");
             double windSpeedKmh = windSpeed * 3.6; // Conversion en km/h
 
-            windSpeedTextView.setText(String.format(Locale.FRANCE, "%s km/h", df.format(windSpeedKmh)));
-            windDirectionTextView.setText(String.format(Locale.FRANCE, "%d° (%s)", windDeg, convertDegToCardinal(windDeg)));
+            // Ajout des libellés pour la vitesse et la direction du vent
+            windSpeedTextView.setText(String.format(Locale.FRANCE, "Vitesse du vent: %s km/h", df.format(windSpeedKmh)));
+            windDirectionTextView.setText(String.format(Locale.FRANCE, "Direction du vent: %d° (%s)", windDeg, convertDegToCardinal(windDeg)));
 
             // 5. Nom de la ville
             String cityName = jsonResponse.getString("name");
@@ -150,6 +149,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, "Erreur lors de l'analyse des données", Toast.LENGTH_SHORT).show();
         }
     }
+
 
     /**
      * Cache le clavier virtuel.
